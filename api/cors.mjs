@@ -14,7 +14,6 @@ const handler = (req, res) => {
     .then(async (result) => {
       let resp, err
 
-      //TODO: parse m3u8 -> add cors prefix
       try {
         resp = await result.text()
       } catch (error) {
@@ -30,7 +29,7 @@ const handler = (req, res) => {
       return resp || err
     })
     .then(res.send)
-    .catch((e) => res.send(e))
+    .catch(res.send)
 }
 
 export default handler
