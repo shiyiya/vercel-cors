@@ -13,23 +13,24 @@ const handler = (req, res) => {
   )
 
   const url = decodeURI(req.query.url)
-  const urlPrefix = url.substring(0, url.lastIndexOf('/'))
+
   fetch(url, {
     method: req.method,
     body: req.body,
     headers: {}
   })
     .then(async (result) => {
-      const ext = path.extname(url)
       let resp = await result.text()
+      const ext = path.extname(url)
 
       if (ext == '.m3u8') {
+        const urlPrefix = url.substring(0, url.lastIndexOf('/'))
         resp = resp.replaceAll(/\n(.*\.m3u8)/g, (sub) => {
           return `\nhttps://cors-flame.vercel.app/api/m3u8?url=${urlPrefix}/${sub.trimLeft()}`
         })
 
         resp = resp.replaceAll(/\n(.*\.ts)/g, (sub) => {
-          // proxy ts file
+          // TODO: proxy ts file
           return `\nhttps://cors-flame.vercel.app/api/m3u8?url=${urlPrefix}/${sub.trimLeft()}`
         })
       }
