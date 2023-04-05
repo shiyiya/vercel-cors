@@ -15,11 +15,11 @@ const handler = (req, res) => {
 
       if (ext == '.m3u8') {
         resp = resp.replaceAll(/\n(.*\.m3u8)/g, (sub) => {
-          return `\nhttps://cors-flame.vercel.app/api/m3u8?url=${urlPrefix}${sub.trimLeft()}`
+          return `\nhttps://cors-flame.vercel.app/api/m3u8?url=${urlPrefix}/${sub.trimLeft()}`
         })
 
         resp = resp.replaceAll(/\n(.*\.ts)/g, (sub) => {
-          return `\nhttps://cors-flame.vercel.app/api/m3u8?url=${urlPrefix}${sub.trimLeft()}`
+          return `\nhttps://cors-flame.vercel.app/api/m3u8?url=${urlPrefix}/${sub.trimLeft()}`
         })
       }
 
