@@ -14,6 +14,7 @@ const handler = (req, res) => {
     .then(async (result) => {
       let resp, err
 
+      //TODO: parse m3u8 -> add cors prefix
       try {
         resp = await result.text()
       } catch (error) {
