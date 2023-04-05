@@ -14,12 +14,12 @@ const handler = (req, res) => {
       let resp = await result.text()
 
       if (ext == '.m3u8') {
-        resp = resp.replaceAll(/\r\n(.*\.m3u8)/g, (sub) => {
-          return `\r\nhttps://cors-flame.vercel.app/api/m3u8?${urlPrefix}${sub}`
+        resp = resp.replaceAll(/\n(.*\.m3u8)/g, (sub) => {
+          return `\nhttps://cors-flame.vercel.app/api/m3u8?${urlPrefix}${sub.trimLeft()}`
         })
 
-        resp = resp.replaceAll(/\r\n(.*\.ts)/g, (sub) => {
-          return `\r\nhttps://cors-flame.vercel.app/api/m3u8?${urlPrefix}${sub}`
+        resp = resp.replaceAll(/\n(.*\.ts)/g, (sub) => {
+          return `\nhttps://cors-flame.vercel.app/api/m3u8?${urlPrefix}${sub.trimLeft()}`
         })
       }
 
