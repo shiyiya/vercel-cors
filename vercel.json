@@ -1,1 +1,8 @@
-{}
+{
+  "rewrites": [
+    {
+      "source": "/api/stream/(.*)",
+      "destination": "/api/stream"
+    }
+  ]
+}
