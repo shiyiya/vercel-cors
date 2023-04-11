@@ -31,7 +31,7 @@ const handler = (req, res) => {
 
         resp = resp.replaceAll(/\n(.*\.ts)/g, (sub) => {
           // TODO: proxy ts file
-          return `\nhttps://cors-flame.vercel.app/api/m3u8?url=${urlPrefix}/${sub.trimLeft()}`
+          return `\nhttps://cors-flame.vercel.app/api/stream?url=${urlPrefix}/${sub.trimLeft()}`
         })
       }
 
