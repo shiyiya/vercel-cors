@@ -10,7 +10,7 @@ vercel --prod
 
 ### Vercel
 
-Host your own instance of Consumet API on Vercel using the button below or fork to edit.
+Host your own instance of cors API on Vercel using the button below or fork to edit.
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fshiyiya%2Fvercel-cors)
 
