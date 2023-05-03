@@ -2,6 +2,10 @@ import fetch from 'node-fetch'
 import path from 'node:path'
 
 const handler = (req, res) => {
+  res.send('NOTE: Please deploy it yourself if you need to use it. https://github.com/shiyiya/vercel-cors')
+
+  return
+
   res.setHeader('Access-Control-Allow-Credentials', true)
   res.setHeader('Access-Control-Allow-Origin', '*')
   // another common pattern; but there might not be origin (for instance call from browser)

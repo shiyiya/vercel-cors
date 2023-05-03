@@ -2,6 +2,8 @@
 
 NOTE: Please deploy it yourself if you need to use it.
 
+I am using vercel's **free plan** for my open source projects only, I have no plans to pay for this now, please deploy it yourself.
+
 ```shell
 npx vercel dev
 
