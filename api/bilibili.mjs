@@ -21,21 +21,26 @@ app.get('/api/bilibili/:tag/:p?', async (req, res) => {
     res.send({
       ...data,
       // video
-      ...(await (await fetch(`https://api.bilibili.com/pgc/player/web/playurl?avid=${aid}&cid=${cid}&qn=1&type=&otype=json&platform=html5&high_quality=1`)).json()),
+      // https://api.bilibili.com/pgc/player/web/playurl?avid=261753014&cid=874196065&qn=1&type=&otype=json&platform=html5&high_quality=1
+      ...(await (await fetch(`https://api.bilibili.com/pgc/player/web/playurl?avid=${aid}&cid=${cid}&qn=1&type=&otype=json&platform=html5&high_quality=1`)).json()).result,
 
       // thumnails
+      // https://api.bilibili.com/x/player/videoshot?bvid=1Ce411V7cX&cid=874196065
       ...(await (await fetch(`https://api.bilibili.com/x/player/videoshot?bvid=${bvid}&cid=${cid}`)).json()).data,
     })
   } else {
+    // http://api.bilibili.com/x/web-interface/view?bvid=1DP411y7RS
     const { message, code, data } = await (await fetch('http://api.bilibili.com/x/web-interface/view?bvid=' + id)).json()
     if (code != 0) return res.send({ message, code })
 
     res.send({
       ...data,
       // video
-      ...(await (await fetch(`https://api.bilibili.com/x/player/playurl?avid=${data.aid}&cid=${data.cid}&qn=1&type=&otype=json&platform=html5&high_quality=1`)).json()),
+      // https://api.bilibili.com/x/player/playurl?avid=313274069&cid=1118156572&qn=1&type=&otype=json&platform=html5&high_quality=1
+      ...(await (await fetch(`https://api.bilibili.com/x/player/playurl?avid=${data.aid}&cid=${data.cid}&qn=1&type=&otype=json&platform=html5&high_quality=1`)).json()).data,
 
       // thumnails
+      // https://api.bilibili.com/x/player/videoshot?bvid=1DP411y7RS&cid=1118156572
       ...(await (await fetch(`https://api.bilibili.com/x/player/videoshot?bvid=${data.bvid}&cid=${data.cid}`)).json()).data,
 
       // subtitle
@@ -43,8 +48,6 @@ app.get('/api/bilibili/:tag/:p?', async (req, res) => {
       // ...(await (await fetch(`https://api.bilibili.com/x/player/v2?avid=${data.aid}&cid=${data.cid}`)).json()).data,
     })
   }
-
-  // axios("http://api.bilibili.com/archive_stat/stat?aid="+resp.data.aid+"&type=jsonp")
 })
 
 app.get('*', (req, res) => {
