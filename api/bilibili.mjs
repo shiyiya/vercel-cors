@@ -9,8 +9,10 @@ app.get('/api/bilibili/:vid/:p?', async (req, res) => {
   if (code != 0) return res.send({ message, code, data })
 
   res.send({
+    ...data,
     ...(await (await fetch(`https://api.bilibili.com/x/player/playurl?avid=${data.aid}&cid=${data.cid}&qn=1&type=&otype=json&platform=html5&high_quality=1`)).json()),
     ...(await (await fetch(`https://api.bilibili.com/x/player/videoshot?bvid=${data.bvid}&cid=${data.cid}`)).json()).data,
+    ...(await (await fetch(`https://api.bilibili.com/x/player/v2?avid=${data.aid}&cid=${data.cid}`)).json()).data,
   })
 
   // axios("http://api.bilibili.com/archive_stat/stat?aid="+resp.data.aid+"&type=jsonp")
