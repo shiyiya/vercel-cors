@@ -7,7 +7,7 @@ const app = express()
 // https://github.com/SocialSisterYi/bilibili-API-collect
 
 app.get('/api/bilibili/:tag/:p?', async (req, res) => {
-  const { tag, p } = req.params
+  const { tag, p = 0 } = req.params
   const id = tag.substring(2)
 
   // anime https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/docs/bangumi/info.md#%E8%8E%B7%E5%8F%96%E5%89%A7%E9%9B%86%E6%98%8E%E7%BB%86web%E7%AB%AFssidepid%E6%96%B9%E5%BC%8F
