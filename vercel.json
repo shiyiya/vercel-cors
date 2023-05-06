@@ -3,6 +3,10 @@
     {
       "source": "/api/stream/(.*)",
       "destination": "/api/stream"
+    },
+    {
+      "source": "/api/bilibili/(.*)",
+      "destination": "/api/bilibili"
     }
   ],
   "headers": [
