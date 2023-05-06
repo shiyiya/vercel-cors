@@ -5,7 +5,7 @@ import request from 'request'
 
 const app = express()
 
-app.get('/api/blibili/:vid', async (req, res) => {
+app.get('/api/bilibili/:vid', async (req, res) => {
   const { data, code, message } = await request('http://api.bilibili.com/x/web-interface/view?bvid=' + req.params.vid)
   if (code != 0) return res.send({ message, code, data })
 
