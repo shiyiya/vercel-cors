@@ -27,6 +27,9 @@ app.get('/api/bilibili/:tag/:p?', async (req, res) => {
       // thumnails
       // https://api.bilibili.com/x/player/videoshot?bvid=1Ce411V7cX&cid=874196065
       ...(await (await fetch(`https://api.bilibili.com/x/player/videoshot?bvid=${bvid}&cid=${cid}`)).json()).data,
+
+      // https://api.bilibili.com/x/v1/dm/list.so?oid=874196065
+      danmakuXML: await (await fetch(`https://api.bilibili.com/x/v1/dm/list.so?oid=${cid}`)).text(),
     })
   } else {
     // http://api.bilibili.com/x/web-interface/view?bvid=1DP411y7RS
@@ -42,6 +45,9 @@ app.get('/api/bilibili/:tag/:p?', async (req, res) => {
       // thumnails
       // https://api.bilibili.com/x/player/videoshot?bvid=1DP411y7RS&cid=1118156572
       ...(await (await fetch(`https://api.bilibili.com/x/player/videoshot?bvid=${data.bvid}&cid=${data.cid}`)).json()).data,
+
+      // https://api.bilibili.com/x/v1/dm/list.so?oid=1118156572
+      danmakuXML: await (await fetch(`https://api.bilibili.com/x/v1/dm/list.so?oid=${cid}`)).text(),
 
       // subtitle
       // https://api.bilibili.com/x/player/v2?aid=951967962&cid=1081397530&ep_id=736258&season_id=43622
