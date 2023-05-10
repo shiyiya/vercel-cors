@@ -7,6 +7,10 @@ const app = express()
 // https://github.com/SocialSisterYi/bilibili-API-collect
 
 app.get('/api/bilibili/:tag/:p?', async (req, res) => {
+  if (req.params.tag == 'danmaku') {
+    return fetchBilibiliDanmakuXML(req, res)
+  }
+
   const { tag, p = 0 } = req.params
   const id = tag.substring(2)
 
@@ -29,7 +33,7 @@ app.get('/api/bilibili/:tag/:p?', async (req, res) => {
       ...(await (await fetch(`https://api.bilibili.com/x/player/videoshot?bvid=${bvid}&cid=${cid}`)).json()).data,
 
       // https://api.bilibili.com/x/v1/dm/list.so?oid=874196065
-      danmakuXML: await (await fetch(`https://api.bilibili.com/x/v1/dm/list.so?oid=${cid}`)).text(),
+      // danmakuXML: await (await fetch(`https://api.bilibili.com/x/v1/dm/list.so?oid=${cid}`)).text(),
     })
   } else {
     // http://api.bilibili.com/x/web-interface/view?bvid=1DP411y7RS
@@ -47,7 +51,7 @@ app.get('/api/bilibili/:tag/:p?', async (req, res) => {
       ...(await (await fetch(`https://api.bilibili.com/x/player/videoshot?bvid=${data.bvid}&cid=${data.cid}`)).json()).data,
 
       // https://api.bilibili.com/x/v1/dm/list.so?oid=1118156572
-      danmakuXML: await (await fetch(`https://api.bilibili.com/x/v1/dm/list.so?oid=${cid}`)).text(),
+      // danmakuXML: await (await fetch(`https://api.bilibili.com/x/v1/dm/list.so?oid=${cid}`)).text(),
 
       // subtitle
       // https://api.bilibili.com/x/player/v2?aid=951967962&cid=1081397530&ep_id=736258&season_id=43622
@@ -55,6 +59,12 @@ app.get('/api/bilibili/:tag/:p?', async (req, res) => {
     })
   }
 })
+
+async function fetchBilibiliDanmakuXML(req, res) {
+  const cid = req.params.p
+  res.type('application/xml')
+  res.send(await (await fetch(`https://api.bilibili.com/x/v1/dm/list.so?oid=${cid}`)).text())
+}
 
 app.get('*', (req, res) => {
   res.send('https://github.com/shiyiya/vercel-cors')
