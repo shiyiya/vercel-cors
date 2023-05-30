@@ -24,8 +24,8 @@ app.get('/api/stream', (req, res) => {
     .pipe(res)
 })
 
-app.get('*', (req, res) => {
-  res.send('https://github.com/shiyiya/vercel-cors')
-})
+// app.get('*', (req, res) => {
+//   res.send('https://github.com/shiyiya/vercel-cors')
+// })
 
 export default app

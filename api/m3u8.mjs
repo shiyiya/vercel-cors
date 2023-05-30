@@ -1,11 +1,8 @@
+// @ts-nocheck
 import fetch from 'node-fetch'
 import path from 'node:path'
 
 const handler = (req, res) => {
-  res.send('NOTE: Please deploy it yourself if you need to use it. https://github.com/shiyiya/vercel-cors')
-
-  return
-
   // res.setHeader('Access-Control-Allow-Credentials', true)
   // res.setHeader('Access-Control-Allow-Origin', '*')
   // // another common pattern; but there might not be origin (for instance call from browser)
@@ -21,7 +18,7 @@ const handler = (req, res) => {
   fetch(url, {
     method: req.method,
     body: req.body,
-    headers: {}
+    headers: {},
   })
     .then(async (result) => {
       let resp = await result.text()
@@ -34,7 +31,6 @@ const handler = (req, res) => {
         })
 
         resp = resp.replaceAll(/\n(.*\.ts)/g, (sub) => {
-          // TODO: proxy ts file
           return `\nhttps://cors-flame.vercel.app/api/stream?url=${urlPrefix}/${sub.trimLeft()}`
         })
       }

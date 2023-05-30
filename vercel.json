@@ -1,6 +1,18 @@
 {
   "rewrites": [
     {
+      "source": "/",
+      "destination": "https://vercel.com/shiyiya/vercel-cors"
+    },
+    {
+      "source": "/cors/:match/:url*",
+      "destination": "https://:match/:url*"
+    },
+    {
+      "source": "/stream/:match/:url*",
+      "destination": "https://:match/:url*"
+    },
+    {
       "source": "/api/stream/(.*)",
       "destination": "/api/stream"
     },
