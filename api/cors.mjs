@@ -6,11 +6,13 @@ const handler = async (req, res) => {
     return
   }
 
+  console.log(req.get('Referrer'))
+
   try {
     const result = await fetch(decodeURI(req.query.url), {
       method: req.method,
       body: req.body,
-      headers: {}
+      headers: {},
     })
 
     const contentType = result.headers.get('content-type')

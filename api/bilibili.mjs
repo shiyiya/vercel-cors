@@ -22,22 +22,24 @@ app.get('/api/bilibili/:tag/:p?', async (req, res) => {
 
     const { aid, bvid, cid } = data.episodes[p]
 
+    console.log(req.get('Referrer'))
+
     res.send({
       ...data,
-      // video
+      // video 抱歉您所在地区不可观看！
       // https://api.bilibili.com/pgc/player/web/playurl?avid=641107054&cid=785726095&qn=1&type=&otype=json&platform=html5&high_quality=1
-      ...(
-        await fetch(
-          `https://api.bilibili.com/pgc/player/web/playurl?avid=${aid}&cid=${cid}&qn=1&type=&otype=json&platform=html5&high_quality=1`,
-          {
-            headers: {
-              referer: `https://www.bilibili.com/bangumi/play/${tag}`,
-              'user-agent':
-                'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 Edg/111.0.1661.62',
-            },
-          }
-        ).then((_) => _.json())
-      ).result,
+      // ...(
+      //   await fetch(
+      //     `https://api.bilibili.com/pgc/player/web/playurl?avid=${aid}&cid=${cid}&qn=1&type=&otype=json&platform=html5&high_quality=1`,
+      //     {
+      //       headers: {
+      //         'User-Agent':
+      //           'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36',
+      //         Host: 'api.bilibili.com',
+      //       },
+      //     }
+      //   ).then((_) => _.json())
+      // ).result,
 
       // thumnails
       // https://api.bilibili.com/x/player/videoshot?bvid=1Ce411V7cX&cid=874196065
