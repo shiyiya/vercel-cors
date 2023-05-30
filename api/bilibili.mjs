@@ -30,9 +30,11 @@ app.get('/api/bilibili/:tag/:p?', async (req, res) => {
         await fetch(
           `https://api.bilibili.com/pgc/player/web/playurl?avid=${aid}&cid=${cid}&qn=1&type=&otype=json&platform=html5&high_quality=1`,
           {
-            referer: `https://www.bilibili.com/bangumi/play/${tag}`,
-            'user-agent':
-              'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 Edg/111.0.1661.62',
+            headers: {
+              referer: `https://www.bilibili.com/bangumi/play/${tag}`,
+              'user-agent':
+                'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 Edg/111.0.1661.62',
+            },
           }
         ).then((_) => _.json())
       ).result,
