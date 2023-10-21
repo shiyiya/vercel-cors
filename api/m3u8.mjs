@@ -13,8 +13,6 @@ const handler = (req, res) => {
   //   'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
   // )
 
-  console.log(req.get('Referrer'))
-
   const url = decodeURI(req.query.url)
 
   fetch(url, {

@@ -6,8 +6,6 @@ const handler = async (req, res) => {
     return
   }
 
-  console.log(req.get('Referrer'))
-
   try {
     const result = await fetch(decodeURI(req.query.url), {
       method: req.method,
@@ -22,13 +20,10 @@ const handler = async (req, res) => {
       return
     }
 
-    res.setHeaders(result.headers)
-    // res.setHeader('content-type', contentType)
-
     let resp
-    if (contentType?.includes('json')) {
+    try {
       resp = await result.json()
-    } else {
+    } catch (error) {
       resp = await result.text()
     }
 
