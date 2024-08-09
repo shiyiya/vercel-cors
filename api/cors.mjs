@@ -7,31 +7,17 @@ const handler = async (req, res) => {
   }
 
   try {
-    const result = await fetch(
-      decodeURI(req.query.url),
-      Object.assign(
-        { method: req.method }
-        // req.method == 'POST' && {
-        //   body: req.body, //FIXME: body used already for
-        // }
-      )
-    )
+    const result = await fetch(decodeURI(req.query.url), {
+      method: req.method,
+      body: req.body,
+      headers: {},
+    })
 
-    const contentType = result.headers.get('content-type')
-
-    if (contentType && ['image', 'video', 'file'].includes(contentType.split('/')[0])) {
-      res.send(contentType)
-      return
+    if (result.status === 200) {
+      res.status(result.status).send(result.body)
+    } else {
+      res.status(result.status).send(result.statusText)
     }
-
-    let resp
-    try {
-      resp = await result.json()
-    } catch (error) {
-      resp = await result.text()
-    }
-
-    res.send(resp)
   } catch (error) {
     res.status(400).send('Bad Request' + error)
   }
