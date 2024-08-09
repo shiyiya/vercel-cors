@@ -7,11 +7,15 @@ const handler = async (req, res) => {
   }
 
   try {
-    const result = await fetch(decodeURI(req.query.url), {
-      method: req.method,
-      body: req.body,
-      headers: {},
-    })
+    const result = await fetch(
+      decodeURI(req.query.url),
+      Object.assign(
+        { method: req.method }
+        // req.method == 'POST' && {
+        //   body: req.body, //FIXME: body used already for
+        // }
+      )
+    )
 
     const contentType = result.headers.get('content-type')
 
@@ -29,7 +33,7 @@ const handler = async (req, res) => {
 
     res.send(resp)
   } catch (error) {
-    res.send(error)
+    res.status(400).send('Bad Request' + error)
   }
 }
 
